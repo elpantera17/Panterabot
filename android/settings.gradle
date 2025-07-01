@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+    }
+}
+
+rootProject.name = 'Pantera Bot Automático'
+include ':app'
+
+// Include Capacitor modules for automation
+apply from: 'capacitor.settings.gradle'
