@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Pantera Bot Automático</string>
+    <string name="accessibility_service_description">
+        Pantera Bot Automático necesita acceso de accesibilidad para detectar y ofertar viajes automáticamente en inDrive. 
+        Este servicio permite al bot:
+        
+        • Detectar automáticamente nuevos viajes disponibles
+        • Leer automáticamente información de distancia y precios
+        • Ofertar automáticamente según tu configuración
+        • Aplicar automáticamente filtros personalizados
+        • Funcionar automáticamente 24/7 sin intervención manual
+        
+        Pantera Bot Automático NO recopila información personal y solo interactúa automáticamente con la app inDrive.
+    </string>
+    
+    <!-- Mensajes del bot automático -->
+    <string name="bot_started">🤖 Pantera Bot Automático iniciado</string>
+    <string name="bot_stopped">⏹️ Pantera Bot Automático detenido</string>
+    <string name="trip_detected">🚗 Viaje detectado automáticamente</string>
+    <string name="bid_placed">💰 Oferta colocada automáticamente</string>
+    <string name="trip_filtered">❌ Viaje filtrado automáticamente</string>
+    
+    <!-- Configuración automática -->
+    <string name="config_saved">✅ Configuración automática guardada</string>
+    <string name="permissions_required">⚠️ Permisos requeridos para automatización</string>
+    <string name="indrive_not_found">📱 inDrive no encontrado</string>
+    
+    <!-- Notificaciones automáticas -->
+    <string name="notification_channel_name">Pantera Bot Automático</string>
+    <string name="notification_channel_description">Notificaciones automáticas del bot para inDrive</string>
+    <string name="service_notification_title">🤖 Pantera Bot Automático Activo</string>
+    <string name="service_notification_text">Detectando y ofertando viajes automáticamente...</string>
+</resources>
