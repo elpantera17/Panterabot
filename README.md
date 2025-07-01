@@ -1,3 +1,4 @@
+# Actualización $(date)
 # 🤖 Pantera Bot v2 - Bot Automático para inDrive
 
 ## 🚀 **Bot inteligente que automatiza ofertas en inDrive**
