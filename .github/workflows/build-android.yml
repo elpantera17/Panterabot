@@ -1,0 +1,87 @@
+name: 🤖 Build Pantera Bot APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📱 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: 🔧 Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
+    - name: 📦 Install dependencies
+      run: npm ci
+      
+    - name: 🏗️ Build web app
+      run: npm run build
+      
+    - name: 🔄 Sync Capacitor
+      run: npx cap sync android
+      
+    - name: 🔧 Make gradlew executable
+      run: chmod +x android/gradlew
+      
+    - name: 🔧 Download Gradle Wrapper JAR (CRÍTICO)
+      run: |
+        cd android
+        echo "📁 Verificando estructura de gradle..."
+        ls -la gradle/wrapper/ || echo "Creando directorio wrapper..."
+        mkdir -p gradle/wrapper
+        
+        echo "📥 Descargando gradle-wrapper.jar..."
+        curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.4.0/gradle/wrapper/gradle-wrapper.jar
+        
+        echo "✅ Verificando descarga..."
+        ls -la gradle/wrapper/
+        file gradle/wrapper/gradle-wrapper.jar
+        
+        echo "🔧 Configurando permisos..."
+        chmod 644 gradle/wrapper/gradle-wrapper.jar
+        
+        echo "✅ gradle-wrapper.jar configurado correctamente"
+        
+    - name: 🏗️ Build Android APK
+      run: |
+        cd android
+        echo "🚀 Iniciando compilación de APK..."
+        ./gradlew assembleDebug --stacktrace --info
+        
+    - name: 📤 Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: pantera-bot-apk
+        path: android/app/build/outputs/apk/debug/app-debug.apk
+        
+    - name: 📋 APK Info
+      run: |
+        echo "🎉 APK generado exitosamente!"
+        echo "📱 Archivo: pantera-bot-apk"
+        echo "📍 Ubicación: android/app/build/outputs/apk/debug/app-debug.apk"
+        echo ""
+        echo "📥 Para descargar:"
+        echo "1. Ve a la pestaña 'Actions' en GitHub"
+        echo "2. Haz clic en este workflow"
+        echo "3. Descarga 'pantera-bot-apk'"
+        echo ""
+        echo "🤖 ¡Tu Pantera Bot está listo para instalar!"
